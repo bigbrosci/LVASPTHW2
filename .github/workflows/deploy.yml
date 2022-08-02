@@ -13,14 +13,14 @@ jobs:
         fetch-depth: 0
     - name: Install mdbook
       run: |
-        mkdir mdbook -f 
+        mkdir mdbook
         curl -sSL https://github.com/rust-lang/mdBook/releases/download/v0.4.18/mdbook-v0.4.18-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=./mdbook
-        echo "`pwd`/mdbook" >> $GITHUB_PATH
+        echo `pwd`/mdbook >> $GITHUB_PATH
     - name: Deploy GitHub Pages
       run: |
         # This assumes your book is in the root of your repository.
         # Just add a `cd` here if you need to change to another directory.
-#        cd docs
+        cd docs
         mdbook build
         git worktree add gh-pages gh-pages
         git config user.name "Deploy from CI"
@@ -33,4 +33,3 @@ jobs:
         git add .
         git commit -m "Deploy $GITHUB_SHA to gh-pages"
         git push --force
-
