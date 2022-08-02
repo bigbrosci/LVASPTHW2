@@ -13,11 +13,9 @@ jobs:
         fetch-depth: 0
     - name: Install mdbook
       run: |
-        mkdir mdbook
+        mkdir mdbook -f 
         curl -sSL https://github.com/rust-lang/mdBook/releases/download/v0.4.18/mdbook-v0.4.18-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=./mdbook
-        #echo `pwd`/mdbook >> "$GITHUB_PATH"
-        mdpath=`pwd`/mdbook
-        export GITHUB_PATH=$PATH:$mdpath 
+        echo `pwd`/mdbook >> $GITHUB_PATH
     - name: Deploy GitHub Pages
       run: |
         # This assumes your book is in the root of your repository.
